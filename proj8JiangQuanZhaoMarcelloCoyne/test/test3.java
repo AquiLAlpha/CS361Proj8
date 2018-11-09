@@ -19,14 +19,14 @@ import java.lang.String;
  }
 */
 class test3 {
-	// Read a String from {} /* the standard input using Scanner 
+	// Read a String from {} /* the standard \n input using Scanner {{{{{{}}}}}}
 	// {Liwei} \n
 	public void a1(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		
-		String helloWorld = new String("HelloWorld\n");
+		String helloWorld = new String("Hello\n{{{{World\n");
 		
-		String byeWorld = new String("{{{{{{''''Bye{World\n");
+		String byeWorld = new String("{{{{{{''''\\\\\"\"\\Bye{World\n");
 		
 		System.out.println(helloWorld);
 		
