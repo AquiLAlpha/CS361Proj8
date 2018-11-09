@@ -67,12 +67,11 @@ public class NontrivialBracesCounter {
     }
 
     /**
-    * counts the number of non-trivial left braces in a java file
-    * contains no error checking for whether the java file is valid java code
+    * reads in the given file and returns it as a single string
     * @param fileName the name of the java file to be checked
-    * @return the count of non-trivial left braces, or -1 if the file failed to load
+    * @return the file as a string, or empty string if the file failed to load
     */
-    public int getNumNontrivialLeftBraces(String fileName){
+    private String getFileAsString(String fileName) {
         File file = new File(fileName);
         try {
             FileInputStream in=new FileInputStream(file);
@@ -83,22 +82,32 @@ public class NontrivialBracesCounter {
 
             in.close();
 
-            String str = new String(buffer,"GB2312");
-            str = removeCommentsAndStrings(str);
-            int braceCount = 0;
-            for(int i = 0; i<str.length(); i++){
-                if(str.charAt(i) == '{'){
-                    braceCount ++;
-                }
-            }
-
-            return(braceCount);
-
+            return( new String(buffer,"GB2312") );
         } catch (IOException e) {
+            return("");
+        }
+    }
+
+    /**
+    * counts the number of non-trivial left braces in a java file
+    * contains no error checking for whether the java file is valid java code
+    * @param fileName the name of the java file to be checked
+    * @return the count of non-trivial left braces, or -1 if the file failed to load
+    */
+    public int getNumNontrivialLeftBraces(String fileName) {
+        String fileString = getFileAsString(fileName);
+        if (fileString.equals("")) {
             return(-1);
         }
-
-    }
+        fileString = removeCommentsAndStrings(fileString);
+        int braceCount = 0;
+        for(int i = 0; i<fileString.length(); i++) {
+            if(fileString.charAt(i) == '{') {
+                braceCount ++;
+            }
+        }
+        return(braceCount);
+    } 
 
     /**
     * Test method for testing the class. Uses command line argument for file name.
