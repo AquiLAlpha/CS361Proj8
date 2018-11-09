@@ -31,7 +31,7 @@ public class Main {
      * @param source the string that comments are to be removed from
      * @return the string with all comments removed
      */
-    public  String removeCommentsAndStrings(String source) {
+    private String removeCommentsAndStrings(String source) {
         String firstPass = removeCommentsAndStringsHelper("//", "\n", source);
         String secondPass = removeCommentsAndStringsHelper("\"", "\"", firstPass);
         String thirdPass = removeCommentsAndStringsHelper("\'", "\'", secondPass);
